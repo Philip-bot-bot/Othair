@@ -6,6 +6,7 @@ const ConfirmButtonStyled = styled.div`
 margin: 20px;
 color: green;
 cursor: pointer;
+font-weight: bold;
 `
 
 export const CenterDiv = styled.div`

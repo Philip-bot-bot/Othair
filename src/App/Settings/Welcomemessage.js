@@ -6,7 +6,7 @@ export default function({firstVisit}) {
         <AppContext.Consumer>
        {({firstVisit})  =>
        firstVisit ? <div>
-      Welcome to CRYPTOOTHAIR, Kindly select your favorites coins to begin.{''}
+     <bold>Welcome to CRYPTOOTHAIR, Kindly select your favorites coins to begin.{''} </bold>
       </div> : null
     }
 
