@@ -1,6 +1,7 @@
 
 import React from "react";
 import styled, {css } from "styled-components";
+import {AppContext} from "./AppProvider";
 
 const Logo = styled.div`
 font-size: 1.8em;
@@ -18,11 +19,18 @@ ${props => props.active && css`
 `}
 `
 
-function ControlButton ({name, active}) {
+function ControlButton ({name}) {
 return (
-    <ControlButtonElem active = {active}>
+    <AppContext.Consumer>
+    {({page, setPage}) => (
+    <ControlButtonElem 
+    active ={page === name}
+    onClick={() => setPage(name)}
+    >
         {name}
     </ControlButtonElem>
+    )}
+    </AppContext.Consumer>
 )
 }
 
