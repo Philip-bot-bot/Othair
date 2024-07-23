@@ -7,6 +7,7 @@ margin: 20px;
 color: green;
 cursor: pointer;
 font-weight: bold;
+font-size: 20px;
 `
 
 export const CenterDiv = styled.div`
