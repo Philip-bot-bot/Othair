@@ -9,9 +9,9 @@ padding: 10px;
 export const SelectableTile = styled(Tile)`
 &:hover {
     cursor: pointer;
-    ${greenBoxShadow}
+     ${greenBoxShadow}
 }
-`
+`;
 export const DeletableTile = styled(SelectableTile)`
 &:hover {
     cursor: pointer;

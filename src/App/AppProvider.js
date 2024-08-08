@@ -18,6 +18,7 @@ constructor(props){
         removeCoin: this.removeCoin,
         isInFavorites: this.isInFavorites,
         confirmFavorites: this.confirmFavorites,
+        setCurrentFavorite: this.setCurrentFavorite,
         setFilteredCoins: this.setFilteredCoins
     }
 }
@@ -72,15 +73,29 @@ removeCoin = key => {
 isInFavorites = key => _.includes(this.state.favorites, key)
 
 confirmFavorites =() => {
+    let currentFavorite = this.state.favorites[0];
     this.setState({
         firstVisit: false,
-        page: 'DASHBOARD'
+        page: 'DASHBOARD',
+        currentFavorite,
     }, () => {
         this.fetchPrices();
     });
     localStorage.setItem('CRYPTOOTHAIR', JSON.stringify({
-        favorites: this.state.favorites
+        favorites: this.state.favorites,
+        currentFavorite
     }));
+}
+
+setCurrentFavorite = (sym) => {
+this.setState({
+    currentFavorite: sym
+});
+localStorage.setItem('CRYPTOOTHAIR', JSON.stringify({
+    ...JSON.parse(localStorage.getItem('CRYPTOOTHAIR')),
+    currentFavorite: sym
+}))
+
 }
 
 savedSettings() {
@@ -88,8 +103,8 @@ savedSettings() {
     if(!CRYPTOOTHAIR){
     return {page: 'SETTNIGS', firstVisit: true} 
   }
-  let {favorites} = CRYPTOOTHAIR;
-    return {favorites};
+  let {favorites, currentFavorite} = CRYPTOOTHAIR;
+    return {favorites, currentFavorite};
 }
 
 setPage = page => this.setState({page})
