@@ -4,6 +4,10 @@ import { AppContext } from "../AppProvider";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import HighchartsConfig from "./HighchartsConfig";
+import HighchartsTheme from "./HighchartsTheme";
+
+Highcharts.setOptions(HighchartsTheme);
+
 
 export default function PriceChart() {
     const options = HighchartsConfig();
