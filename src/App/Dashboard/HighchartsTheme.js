@@ -1,31 +1,38 @@
- export default {
+
+import { lightTheme } from "../Shared/Styles";
+
+export default {
 
     colors: ['#1f78b4', '#a6cee3', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a'],
+    
     chart: {
-        backgroundColor: '#001f3f', // Dark blue background
+        backgroundColor: lightTheme ? 'white' : '#001f3f',
         style: {
-            fontFamily: 'Arial, sans-serif'
+            fontFamily: 'Arial, sans-serif',
         },
         plotBorderColor: '#606063'
     },
+
     title: {
         style: {
-            color: '#E0E0E3',
+            color: lightTheme ? '#000000' : '#E0E0E3',  // Black for light theme
             textTransform: 'uppercase',
             fontSize: '20px'
         }
     },
+
     subtitle: {
         style: {
-            color: '#E0E0E3',
+            color: lightTheme ? '#000000' : '#E0E0E3',  // Black for light theme
             textTransform: 'uppercase'
         }
     },
+
     xAxis: {
         gridLineColor: '#707073',
         labels: {
             style: {
-                color: '#E0E0E3'
+                color: lightTheme ? '#000000' : '#E0E0E3'  // Black for light theme
             }
         },
         lineColor: '#707073',
@@ -33,16 +40,17 @@
         tickColor: '#707073',
         title: {
             style: {
-                color: '#A0A0A3'
+                color: lightTheme ? '#000000' : '#A0A0A3'  // Black for light theme
             }
         }
     },
+
     yAxis: {
         gridLineWidth: 0,
         gridLineColor: '#707073',
         labels: {
             style: {
-                color: '#E0E0E3'
+                color: lightTheme ? '#000000' : '#E0E0E3'  // Black for light theme
             }
         },
         lineColor: '#707073',
@@ -51,20 +59,22 @@
         tickWidth: 1,
         title: {
             style: {
-                color: '#A0A0A3'
+                color: lightTheme ? '#000000' : '#A0A0A3'  // Black for light theme
             }
         }
     },
+
     tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.85)',
         style: {
             color: '#F0F0F0'
         }
     },
+
     plotOptions: {
         series: {
             dataLabels: {
-                color: '#B0B0B3'
+                color: lightTheme ? '#000000' : '#B0B0B3'  // Black for light theme
             },
             marker: {
                 lineColor: '#333'
@@ -80,10 +90,11 @@
             color: 'white'
         }
     },
+
     legend: {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         itemStyle: {
-            color: '#E0E0E3'
+            color: lightTheme ? '#000000' : '#E0E0E3'  // Black for light theme
         },
         itemHoverStyle: {
             color: '#FFF'
@@ -93,25 +104,27 @@
         },
         title: {
             style: {
-                color: '#C0C0C0'
+                color: lightTheme ? '#000000' : '#C0C0C0'  // Black for light theme
             }
         }
     },
+
     credits: {
         enabled: false
     },
+
     labels: {
         style: {
-            color: '#707073'
+            color: lightTheme ? '#000000' : '#707073'  // Black for light theme
         }
     },
 
     drilldown: {
         activeAxisLabelStyle: {
-            color: '#F0F0F3'
+            color: lightTheme ? '#000000' : '#F0F0F3'  // Black for light theme
         },
         activeDataLabelStyle: {
-            color: '#F0F0F3'
+            color: lightTheme ? '#000000' : '#F0F0F3'  // Black for light theme
         }
     },
 
@@ -124,7 +137,6 @@
         }
     },
 
-    // Scroll charts
     rangeSelector: {
         buttonTheme: {
             fill: '#505053',
