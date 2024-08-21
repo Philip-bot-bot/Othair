@@ -1,9 +1,12 @@
 import React from 'react';
 import _ from 'lodash';
+import moment from 'moment';
+
 const cc = require('cryptocompare');
 
 export const AppContext = React.createContext();
 const MAX_FAVORITES = 10;
+const TIME_UNITS = 10;
 
 export class AppProvider extends React.Component{
 
@@ -26,6 +29,7 @@ constructor(props){
 componentDidMount = () => {
 this.fetchCoins();
 this.fetchPrices();
+this.fetchHistorical();
 }
 
 fetchCoins = async () => {
@@ -42,6 +46,21 @@ fetchPrices = async () => {
     this.setState({prices});
   }
 
+ fetchHistorical = async () => {
+    if(this.state.firstVisit) return;
+    let results = await this.historical();
+    let historical = [
+        {
+            name: this.state.currentFavorite,
+            data: results.map((ticker, index) => [
+            moment().subtract({months: TIME_UNITS - index}).valueOf(),
+            ticker.USD
+            ])    
+        }
+    ]
+    this.setState({historical});
+ } 
+
 prices = async () => {
     let returnData = [];
     for (let i = 0; i < this.state.favorites.length; i++){
@@ -55,6 +74,22 @@ prices = async () => {
     return returnData;
 }
 
+historical = () => {
+ let promises = [];
+ for (let units = TIME_UNITS; units > 0; units--){
+    promises.push(
+        cc.priceHistorical(
+        this.state.currentFavorite, 
+        ['USD'],
+        moment()
+        .subtract({months: units})
+        .toDate()
+        )
+    )
+ }
+return Promise.all(promises);
+
+}
 
 addCoin = key => {
     let favorites = [...this.state.favorites];
@@ -78,8 +113,11 @@ confirmFavorites =() => {
         firstVisit: false,
         page: 'DASHBOARD',
         currentFavorite,
+        prices: null,
+        historical: null
     }, () => {
         this.fetchPrices();
+        this.fetchHistorical();
     });
     localStorage.setItem('CRYPTOOTHAIR', JSON.stringify({
         favorites: this.state.favorites,
@@ -89,8 +127,9 @@ confirmFavorites =() => {
 
 setCurrentFavorite = (sym) => {
 this.setState({
-    currentFavorite: sym
-});
+    currentFavorite: sym,
+    historical: null
+}, this.fetchHistorical);
 localStorage.setItem('CRYPTOOTHAIR', JSON.stringify({
     ...JSON.parse(localStorage.getItem('CRYPTOOTHAIR')),
     currentFavorite: sym

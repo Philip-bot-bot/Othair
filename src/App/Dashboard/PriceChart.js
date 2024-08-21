@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Tile } from "../Shared/Tile";
 import { AppContext } from "../AppProvider";
@@ -8,20 +9,28 @@ import HighchartsTheme from "./HighchartsTheme";
 
 Highcharts.setOptions(HighchartsTheme);
 
-
 export default function PriceChart() {
-    const options = HighchartsConfig();
-
     return (
         <AppContext.Consumer>
-            {() => (
-                <Tile>
-                    <HighchartsReact 
-                        highcharts={Highcharts}
-                        options={options}
-                    />
-                </Tile>
-            )}
+            {({ historical }) => {
+                const options = HighchartsConfig(historical); // Pass historical data to HighchartsConfig
+                return (
+                    <Tile>
+                      
+                       { historical ?
+                        
+                        <HighchartsReact 
+                            highcharts={Highcharts} // Pass Highcharts directly
+                       
+                            options={options} // Use options configured with historical data
+                          
+                        />
+                        :<div>Loading historical data</div>
+                        }
+                    </Tile>
+                );
+            }}
         </AppContext.Consumer>
     );
 }
+

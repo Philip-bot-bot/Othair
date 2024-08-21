@@ -1,4 +1,4 @@
-export default function HighchartsConfig () {
+export default function HighchartsConfig (historical) {
  
     return {
 
@@ -14,9 +14,7 @@ export default function HighchartsConfig () {
         },
     
         xAxis: {
-            accessibility: {
-                rangeDescription: 'Range: 2010 to 2022'
-            }
+            type: 'datetime'
         },
     
         legend: {
@@ -34,15 +32,7 @@ export default function HighchartsConfig () {
             }
         },
     
-        series: [{
-            name: 'Installation & Developers',
-            data: [
-                43934, 48656, 65165, 81827, 112143, 142383,
-                171533, 165174, 155157, 161454, 154610, 168960, 171558
-            ]
-        }, {
-         
-        }],
+        series: historical,
     
         responsive: {
             rules: [{
