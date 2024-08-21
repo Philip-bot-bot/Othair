@@ -15,6 +15,7 @@ constructor(props){
     this.state = {
         page: 'DASHBOARD',
         favorites: ['BTC', 'ETH', 'XMR','DOGE'],
+        timeInterval: 'months',
         ...this.savedSettings(),
         setPage: this.setPage,
         addCoin: this.addCoin,
@@ -22,7 +23,8 @@ constructor(props){
         isInFavorites: this.isInFavorites,
         confirmFavorites: this.confirmFavorites,
         setCurrentFavorite: this.setCurrentFavorite,
-        setFilteredCoins: this.setFilteredCoins
+        setFilteredCoins: this.setFilteredCoins,
+        changeChartSelect: this.changeChartSelect
     }
 }
 
@@ -53,7 +55,7 @@ fetchPrices = async () => {
         {
             name: this.state.currentFavorite,
             data: results.map((ticker, index) => [
-            moment().subtract({months: TIME_UNITS - index}).valueOf(),
+            moment().subtract({[this.state.timeInterval]:TIME_UNITS - index}).valueOf(),
             ticker.USD
             ])    
         }
@@ -82,7 +84,7 @@ historical = () => {
         this.state.currentFavorite, 
         ['USD'],
         moment()
-        .subtract({months: units})
+        .subtract({[this.state.timeInterval]: units})
         .toDate()
         )
     )
@@ -149,6 +151,11 @@ savedSettings() {
 setPage = page => this.setState({page})
 
 setFilteredCoins = (filteredCoins) => this.setState({filteredCoins})
+
+changeChartSelect = (value) => {
+    console.log(value);
+    this.setState ({timeInterval: value, historical: null}, this.fetchHistorical);
+}
 
 render(){
 return (
