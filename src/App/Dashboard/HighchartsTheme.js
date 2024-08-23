@@ -20,6 +20,9 @@ export default {
             fontSize: '20px'
         }
     },
+    accessibility: {
+        enabled: false
+    },
 
     subtitle: {
         style: {
