@@ -15,6 +15,10 @@ grid-template-columns: 1fr 3fr;
 
 export default function () {
     return <Page name="DASHBOARD"> 
+      {/* Warning Message */}
+      <div style={{  padding: '10px', marginBottom: '10px', fontWeight: 'bold', textAlign: 'center' }}>
+            Notice: If a coin doesn't respond, please refresh the page or note that market data may be unavailable.
+            </div>
         <PriceGrid/>
         <ChartGrid>
        <CoinSpotlight/>

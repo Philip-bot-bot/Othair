@@ -15,6 +15,8 @@ constructor(props){
     this.state = {
         page: 'DASHBOARD',
         favorites: ['BTC', 'ETH', 'XMR','DOGE'],
+        showWarning: false, //warning message
+        warningMessage: '', // New state to hold warning message
         timeInterval: 'months',
         ...this.savedSettings(),
         setPage: this.setPage,
